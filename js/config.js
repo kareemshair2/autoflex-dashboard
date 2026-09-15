@@ -36,24 +36,24 @@ window.APP_CONFIG = {
 
   CURRENCY: 'جنيه',
 
-  /* لوحة الألوان: هوية العلامة */
+  /* لوحة الألوان: هوية العلامة (استُخرجت من لوجو AutoFlex الأحمر) */
   COLORS: {
-    blue: '#014976',
-    blueDark: '#073b5c',
-    blueSoft: '#0a5a8e',
-    orange: '#FBAE42',
-    orangeDark: '#e0921f',
+    blue: '#A40E0E',
+    blueDark: '#6E0808',
+    blueSoft: '#B83232',
+    orange: '#D10000',
+    orangeDark: '#A81717',
     cream: '#F4F3EF',
-    ink: '#13222e',
-    muted: '#5f6b76',
-    line: '#dbe1de',
+    ink: '#1B2733',
+    muted: '#6B7A88',
+    line: '#E4E7EA',
     white: '#ffffff',
     good: '#2e9e6b',
-    warn: '#d9a441',
-    bad: '#cf5340',
+    warn: '#c96f2c',
+    bad: '#c0392b',
     chart: {
-      base: ['#014976', '#FBAE42', '#0a5a8e', '#7f9bb3', '#e4a04b', '#2e9e6b', '#9b7fb3', '#b3541e',
-             '#133f5c', '#d9c08a', '#3f6c8f', '#8fa9bb', '#c9a86a', '#1b6f9b', '#e8b86e', '#5f6b76']
+      base: ['#A40E0E', '#D10000', '#B83232', '#E05252', '#8C2E2E', '#2e9e6b', '#E8A13C', '#6b4e9b',
+             '#A8523A', '#9C3D3D', '#E3A1A1', '#5C6B80', '#C26B6B', '#B0550F', '#DB8A8A', '#3A3A3A']
     }
   },
 
