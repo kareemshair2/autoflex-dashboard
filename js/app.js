@@ -109,7 +109,8 @@
       btn.classList.add('spinning');
       btn.disabled = true;
       try {
-        await Api.refreshData({ fallback: true });
+        // تحديث يدوي دائمًا بجلب جديد يتجاوز الكاش
+        await Api.refreshData({ fallback: true, fresh: true });
         D.buildRecords();
         afterDataReady();
       } catch (err) {
@@ -144,7 +145,7 @@
     var minutes = parseInt(v, 10);
     if (!minutes || minutes <= 0) return;
     autoTimer = setInterval(function () {
-      Api.refreshData({ fallback: true }).then(function () {
+      Api.refreshData({ fallback: true, fresh: true }).then(function () {
         D.buildRecords();
         afterDataReady();
       }).catch(function () { /* صامت - السطر القادم يحاول مرة أخرى */ });

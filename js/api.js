@@ -9,11 +9,14 @@
 
   var DB = null;
 
-  function buildApiUrl() {
+  function buildApiUrl(fresh) {
     var cfg = window.APP_CONFIG;
     if (!cfg.API_URL) return null;
-    var sep = cfg.API_URL.indexOf('?') === -1 ? '?' : '&';
-    return cfg.API_URL + sep + 'action=all&v=' + Date.now();
+    var url = cfg.API_URL;
+    var sep = url.indexOf('?') === -1 ? '?' : '&';
+    url += sep + 'action=all&v=' + Date.now();
+    if (fresh) url += '&refresh=1'; // تجاوز كاش Apps Script: يعكس أحدث تعديل فورًا
+    return url;
   }
 
   function validatePayload(json) {
@@ -48,7 +51,8 @@
 
   /* تحميل البيانات الرئيسي (مرة واحدة عند فتح الصفحة) */
   async function loadData(prefs) {
-    var apiUrl = buildApiUrl();
+    prefs = prefs || {};
+    var apiUrl = buildApiUrl(prefs.fresh === true);
     var lastError = '';
     if (apiUrl) {
       try {
@@ -57,7 +61,7 @@
         return DB;
       } catch (err) {
         lastError = err && err.message ? err.message : String(err);
-        if (!prefs || prefs.fallback === true) {
+        if (prefs.fallback === true) {
           return loadFallback('تعذر الاتصال بالبيانات الحية، جاري عرض المعاينة. (' + lastError + ')');
         }
         DB = null;
