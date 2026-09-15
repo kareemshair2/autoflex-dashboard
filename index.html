@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#014976">
+  <title>AutoFlex — لوحة البيانات</title>
+
+  <!-- الخطوط: Changa للعناوين + Almarai للنصوص -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Changa:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js (نسخة محلية لضمان السرعة وعدم الاعتماد على الإنترنت وقت التشغيل) -->
+  <script defer src="vendor/chart.umd.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- شاشة تحميل أولى -->
+  <div id="app-loading" class="loading-screen" style="display:none">
+    <div class="loading-inner">
+      <div class="loading-mark">AF</div>
+      <p>جارٍ تحميل البيانات من Google Sheets...</p>
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <!-- خطأ فادح -->
+  <div id="app-error" class="error-screen" style="display:none">
+    <div class="error-inner">
+      <h2>تعذر تحميل البيانات</h2>
+      <p id="app-error-msg"></p>
+      <button type="button" class="btn btn-solid" onclick="window.DashboardApp&&location.reload()">إعادة المحاولة</button>
+    </div>
+  </div>
+
+  <!-- الهيدر -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">AF</div>
+        <div class="brand-text">
+          <h1 class="brand-name" id="brand-name">AutoFlex</h1>
+          <p class="brand-sub" id="brand-sub">لوحة إدارة البيانات</p>
+        </div>
+      </div>
+      <div class="header-meta">
+        <span class="conn-badge" id="conn-badge">جاري الاتصال...</span>
+        <span class="last-updated" id="last-updated-text">آخر تحديث: —</span>
+        <label class="auto-refresh">
+          <span>تحديث تلقائي</span>
+          <select id="auto-refresh-select" class="input input-select input-sm"></select>
+        </label>
+        <button type="button" id="refresh-btn" class="btn btn-solid btn-sm">
+          <span class="refresh-icon">↻</span> تحديث الآن
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- الوضع الحالي -->
+  <div id="mode-notice" class="mode-notice" style="display:none"></div>
+  <div id="app-notice" class="notice"></div>
+
+  <main class="layout">
+
+    <!-- الفلاتر -->
+    <section class="filters-section">
+      <div class="filters-head">
+        <h2 class="filters-title">الفلاتر</h2>
+        <span class="filters-hint">تؤثر على كل الأقسام في نفس الوقت</span>
+      </div>
+      <div id="filters-bar" class="filters-bar"></div>
+    </section>
+
+    <!-- التنقل -->
+    <nav id="nav-tabs" class="nav-tabs" aria-label="أقسام اللوحة">
+      <button type="button" class="tab active" data-tab="overview">نظرة عامة</button>
+      <button type="button" class="tab" data-tab="invoice">الفواتير</button>
+      <button type="button" class="tab" data-tab="expense">المصاريف</button>
+      <button type="button" class="tab" data-tab="supply">التوريد</button>
+      <button type="button" class="tab" data-tab="return">المرتجعات</button>
+      <button type="button" class="tab" data-tab="quality">جودة البيانات</button>
+    </nav>
+
+    <!-- الأقسام -->
+    <div class="sections">
+      <section id="tab-overview" class="section active"></section>
+      <section id="tab-invoice" class="section"></section>
+      <section id="tab-expense" class="section"></section>
+      <section id="tab-supply" class="section"></section>
+      <section id="tab-return" class="section"></section>
+      <section id="tab-quality" class="section"></section>
+    </div>
+  </main>
+
+  <!-- الفوتر -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-name" id="owner-line">—</p>
+      <p class="footer-note">البيانات تُقرأ من Google Sheets عبر Google Apps Script API — تُخزّن محليًا وتُفلتر بدون تحميل إضافي.</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox للصور -->
+  <div id="lightbox" class="lightbox" style="display:none">
+    <button type="button" class="lightbox-close" aria-label="إغلاق">×</button>
+    <img id="lightbox-img" src="" alt="صورة أكبر">
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/tables.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
